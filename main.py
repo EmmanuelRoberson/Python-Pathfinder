@@ -22,10 +22,12 @@ def find_path(starting_waypoint, target_waypoint):
 
         visited_list.append(w_p) #add the current neightbor to the visited list
 
-        if (w_p.x is target_waypoint.x and w_p.y is target_waypoint.y): #check if the current waypoint is the target
-            return w_p #return the waypoint if true
+        if (w_p is target_waypoint): #check if the current waypoint is the target
+            if (w_p is target_waypoint):
+                return w_p #return the waypoint if true
 
-        current_neighbors = w_p.get_neighbors() #get the neighbors of the current waypoint
+        current_waypoint = w_p
+        current_neighbors = current_waypoint.get_neighbors() #get the neighbors of the current waypoint
         
         for c_n in current_neighbors: #set each neighbors' parent to the current waypoint
             c_n.parent = w_p
