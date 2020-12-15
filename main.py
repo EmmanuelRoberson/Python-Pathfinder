@@ -14,20 +14,21 @@ def find_path(starting_waypoint, target_waypoint):
     open_list = [starting_waypoint] #add the start to the open list. open list is the list of waypoints that need to be checked
     visited_list = [] #list of already visited waypoints
 
-    for cw in open_list: #iterate through all the waypoints in the open list
+    for w_p in open_list: #iterate through all the waypoints in the open list
 
-        if (visited_list.__contains__(cw)): #if we already visited this waypoint, move to the next one
-            continue
+        for v_w in visited_list: #if we already visited this waypoint, move to the next one
+            if w_p is v_w:
+                continue
 
-        visited_list.append(cw) #add the current neightbor to the visited list
+        visited_list.append(w_p) #add the current neightbor to the visited list
 
-        if (cw.x is target_waypoint.x and cw.y is target_waypoint.y): #check if the current waypoint is the target
-            return cw #return the waypoint if true
+        if (w_p.x is target_waypoint.x and w_p.y is target_waypoint.y): #check if the current waypoint is the target
+            return w_p #return the waypoint if true
 
-        current_neighbors = cw.get_neighbors() #get the neighbors of the current waypoint
+        current_neighbors = w_p.get_neighbors() #get the neighbors of the current waypoint
         
-        for cn in current_neighbors: #set each neighbors' parent to the current waypoint
-            cn.parent = cw
+        for c_n in current_neighbors: #set each neighbors' parent to the current waypoint
+            c_n.parent = w_p
 
         open_list.append(current_neighbors) #add the neighbors to the open list
 
@@ -40,12 +41,18 @@ def main():
     #implementation goes here
 
     start = WayPoint(0,0)
+    wp1 = WayPoint(1,0)
+    wp2 = WayPoint(0,1)
+    wp3 = WayPoint(2,2)
 
-    start.neighbors = [WayPoint(1,0), WayPoint(0,1)]
+    start.neighbors.append(wp1)
+    start.neighbors.append(wp2)
 
-    the_target = find_path(start, WayPoint(0,1))
+    the_target = find_path(start, wp1)
+    not_the_target = find_path(start, wp3)
 
-    not_the_target = find_path(start, WayPoint(2,2))
+    print(the_target is wp1)
+    print(not_the_target is wp3)
     
     return None
 
