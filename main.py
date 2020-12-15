@@ -11,11 +11,11 @@ class WayPoint:
 
 #Finds a target by searching through every possible node in the vicinity. Also known as Breadth First Search
 def find_path(starting_waypoint, target_waypoint):
-    open_list = [starting_waypoint] #add the start to the open list. open list is the list of waypoints that need to be checked
+    open_list = []
+    open_list.append( starting_waypoint ) #add the start to the open list. open list is the list of waypoints that need to be checked
     visited_list = [] #list of already visited waypoints
 
     for w_p in open_list: #iterate through all the waypoints in the open list
-
         for v_w in visited_list: #if we already visited this waypoint, move to the next one
             if w_p is v_w:
                 continue
@@ -47,6 +47,11 @@ def main():
 
     start.neighbors.append(wp1)
     start.neighbors.append(wp2)
+
+
+    for n_bor in start.neighbors: #prints the x and y in the neighbors
+        print(n_bor.x)
+        print(n_bor.y)
 
     the_target = find_path(start, wp1)
     not_the_target = find_path(start, wp3)
