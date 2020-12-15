@@ -1,4 +1,13 @@
-import waypoint
+class WayPoint:
+    
+    def __init__(self, xVal, yVal):
+        self.x = xVal #x positional value
+        self.y = yVal #y positional value
+        self.neighbors = [] #list of neighbor waypoints
+        self.parent = None #parent waypoint
+
+    def get_neighbors(self): #return neighbor waypoints
+        return self.neighbors
 
 #Finds a target by searching through every possible node in the vicinity. Also known as Breadth First Search
 def find_path(starting_waypoint, target_waypoint):
@@ -12,7 +21,7 @@ def find_path(starting_waypoint, target_waypoint):
 
         visited_list.append(cw) #add the current neightbor to the visited list
 
-        if (cw is target_waypoint): #check if the current waypoint is the target
+        if (cw.x is target_waypoint.x and cw.y is target_waypoint.y): #check if the current waypoint is the target
             return cw #return the waypoint if true
 
         current_neighbors = cw.get_neighbors() #get the neighbors of the current waypoint
@@ -29,6 +38,15 @@ def find_path(starting_waypoint, target_waypoint):
 def main():
 
     #implementation goes here
+
+    start = WayPoint(0,0)
+
+    start.neighbors = [WayPoint(1,0), WayPoint(0,1)]
+
+    the_target = find_path(start, WayPoint(0,1))
+
+    not_the_target = find_path(start, WayPoint(2,2))
+    
     return None
 
 
