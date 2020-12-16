@@ -15,7 +15,9 @@ def find_path(starting_waypoint, target_waypoint):
     open_list.append( starting_waypoint ) #add the start to the open list. open list is the list of waypoints that need to be checked
     visited_list = [] #list of already visited waypoints
 
+    loop = 0
     for w_p in open_list: #iterate through all the waypoints in the open list
+        #print(w_p)
         for v_w in visited_list: #if we already visited this waypoint, move to the next one
             if w_p is v_w:
                 continue
@@ -32,7 +34,10 @@ def find_path(starting_waypoint, target_waypoint):
         for c_n in current_neighbors: #set each neighbors' parent to the current waypoint
             c_n.parent = w_p
 
-        open_list.append(current_neighbors) #add the neighbors to the open list
+        for n_b in current_neighbors:
+            open_list.append(n_b) #add the neighbors to the open list
+        loop += 1
+        #print(type(w_p) is list, loop)
 
 
     return None #return none if the target isnt found
@@ -50,10 +55,6 @@ def main():
     start.neighbors.append(wp1)
     start.neighbors.append(wp2)
 
-
-    for n_bor in start.neighbors: #prints the x and y in the neighbors
-        print(n_bor.x)
-        print(n_bor.y)
 
     the_target = find_path(start, wp1)
     not_the_target = find_path(start, wp3)
